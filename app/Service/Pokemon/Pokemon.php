@@ -97,7 +97,8 @@ class Pokemon
                     if(json_last_error() !== JSON_ERROR_NONE){
                         throw new Exception("Ocorreu um erro ao buscar detalhes das habilidades!");
                     }
-                    $arrayMovesDetail[$url] = $move;
+                    $arrayMovesDetail[$url]['name'] = $move['name'];
+                    $arrayMovesDetail[$url]['move'] = $move;
                 }
                 catch (Exception $e){
                     $arrayMovesDetail[$url] = ['erro' => $e->getMessage()];
