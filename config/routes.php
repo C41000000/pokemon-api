@@ -9,13 +9,21 @@ declare(strict_types=1);
  * @contact  group@hyperf.io
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
-use Hyperf\HttpServer\Router\Router;
-use App\Controller\Pokemon\PokemonController;
 
-Router::addRoute(['GET', 'POST', 'HEAD'], '/', 'App\Controller\Pokemon\PokemonController@list');
-Router::addGroup("/pokemon", function (){
-    Router::addRoute(['GET', 'POST'], '/list', 'App\Controller\Pokemon\PokemonController@list');
-});
+use Gokure\HyperfCors\CorsMiddleware;
+use Hyperf\HttpServer\Router\Router;
+use Hyperf\HttpServer\Annotation\Middleware;
+
+Router::addGroup(
+    '/pokemon', function () {
+    Router::get('/list', [\App\Controller\Pokemon\PokemonController::class, 'list']);
+},
+    [
+        'middleware' => [
+            CorsMiddleware::class,
+        ]
+    ]
+);
 Router::get('/favicon.ico', function () {
     return '';
 });
