@@ -50,8 +50,7 @@ class Pokemon
                     $pokemon['details']['moves'] = $this->getMoves($subject);
                 }
                 catch (Exception $e){
-                    $pokemon['test'] = $e->getMessage();
-                    $pokemon['details'] = ['erro1' => $e->getMessage()];
+                    $pokemon['details'] = ['erro' => $e->getMessage()];
                 } finally {
                     $waitGroup->done();
                 }
